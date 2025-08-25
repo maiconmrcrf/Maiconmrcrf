@@ -191,7 +191,7 @@ function confirmSelection() {
     const animalName = animals[selectedGroup-1];
     const idText=`GRUPO-${selectedGroup}-${animalName}-${generatedId}`;
     navigator.clipboard.writeText(idText);
-    const message=encodeURIComponent(`Olá, gostaria de reservar o grupo ${selectedGroup} (${animalName})\nMeu ID de confirmação é: ${idText}\n\nChave PIX para pagamento:\n${config.pixKey}\n\naguardando o comprovante 🙏 acompanhe site aqui https://maiconmrcrf.github.io/Maiconmrcrf/.`);
+    const message=encodeURIComponent(`Olá, gostaria de reservar o grupo ${selectedGroup} (${animalName})\nMeu ID de confirmação é: ${idText}\n\nChave PIX para pagamento:\n${config.pixKey}\n\naguardando o comprovante 🙏 acompanhe site aqui https://maiconmrcrf.github.io/Maiconmrcrf/`);
     window.open(`https://wa.me/${config.whatsappNumber}?text=${message}`,'_blank');
     document.getElementById("confirmationSection").style.display="none";
     selectedGroup=null;
