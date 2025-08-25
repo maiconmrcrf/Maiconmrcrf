@@ -6,8 +6,8 @@
   <title>RIFA BRASIL - Sorteios</title>
   <script>
     const config = {
-      premiumValue: 100,
-      ticketValue: 5,
+      premiumValue: 150,
+      ticketValue: 10,
       winningNumber: null,
       reservedGroups: "[1] [2] [3] [4] [5] [6] [7] [8] [9] [10] [11] [12] [13] [14] [15] [16] [17] [18] [19] [20] [21] [22] [23] [24] [25]",
       pixKey: "71987515593. Maicon Barbosa Gabriel",
@@ -191,7 +191,7 @@ function confirmSelection() {
     const animalName = animals[selectedGroup-1];
     const idText=`GRUPO-${selectedGroup}-${animalName}-${generatedId}`;
     navigator.clipboard.writeText(idText);
-    const message=encodeURIComponent(`Olá, gostaria de reservar o grupo ${selectedGroup} (${animalName})\nMeu ID de confirmação é: ${idText}\n\nChave PIX para pagamento:\n${config.pixKey}\n\naguardando o comprovante 🙏 acompanhe site aqui https://rifadodia.github.io/RIFADODIA/.`);
+    const message=encodeURIComponent(`Olá, gostaria de reservar o grupo ${selectedGroup} (${animalName})\nMeu ID de confirmação é: ${idText}\n\nChave PIX para pagamento:\n${config.pixKey}\n\naguardando o comprovante 🙏 acompanhe site aqui https://maiconmrcrf.github.io/Maiconmrcrf/.`);
     window.open(`https://wa.me/${config.whatsappNumber}?text=${message}`,'_blank');
     document.getElementById("confirmationSection").style.display="none";
     selectedGroup=null;
